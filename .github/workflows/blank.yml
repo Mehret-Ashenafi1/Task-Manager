@@ -1,0 +1,85 @@
+# creating a task manager for a small business
+# prompt user to enter username and password
+# valid usernames and passwords stored in user.txt
+# use open method and while and if/else loop to break program when values in user.txt are not entered
+# r - register user
+# a - add task
+# va - view all tasks
+# vm - view my tasks
+# e - exit
+
+while True:
+  username = input("Enter your username: ")
+  password = input("Enter your password: ")
+  with open("user.txt", "r") as userfile:
+    read_userfile = userfile.readlines()
+      for user in read_userfile:
+          split1 = user.split(", ")
+          if username == split1[0] and password == split1[1]:
+              print("Great, you're all logged in!")            
+  break
+while True: 
+    menu = input('''Select one of the following Options below:
+r - Registering a user
+a - Adding a task
+va - View all tasks
+vm - view my task
+e - Exit
+: ''').lower()
+    if menu == 'r':    
+        username1 = input("Enter your username: ")
+        password1 = input("Enter your password: ")
+        if username1 == "admin": # giving user admin ownership rights
+            if username and password:
+                user_info = open("user.txt", "a")
+                user_info.write(f"\n{username}, {password}")
+                
+                print(f"Total number of users added: {len(username)}") 
+
+                
+                user_info.close()
+            
+      else:
+        print("This password is incorrect, please ensure your password matches what you entered.")
+        reconfirm = input("Please enter the correct password: ")
+            
+    elif menu == 'a':
+        # adding a new task to task.txt
+        print("Hi there, I'm your task manager, here to organise your tasks and time with efficincy!")
+        user_input = input("Please begin by entering your username: ")
+        title = input("Task: ")
+        task_info = input("Task description: ")
+        deadline = input("Deadline: ")
+        date_assigned = (input("Date assigned: "))
+        progress = input("Task Complete?: ").lower()
+        
+        # appending user_data to task.txt
+        user_data = open("tasks.txt", "a")
+        user_data.write(f"\n{user_input}, {title}, {task_info}, {deadline}, {progress}")
+        user_data.close()
+
+    elif menu == 'va':
+      # reading the task.txt file
+      with open("tasks.txt", "r") as file: #allows you open the file at any time - safe and more controlled method
+          # using a for loop to check for comma to split the line, then create a new file to use split()
+          file1 = file.readlines()
+          for y in file1:
+              split3 = y.split(", ") 
+          print(y)
+          print(f"Total number of tasks added: {len(title)}") 
+
+    elif menu == 'vm':
+        file = open("tasks.txt", "r")
+        read_file2 = file.readlines() # lists don't work with split
+        for userX in read_file2: #splitting the task file
+            split2 = userX.split(", ")
+            for x in split2:
+                print(x)
+    
+    elif menu == 'e':
+        print('Goodbye!!!')
+        exit()
+
+    else:
+        print("You have made a wrong choice, please try again.")
+
